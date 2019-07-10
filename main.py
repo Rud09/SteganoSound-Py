@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+
+import embedder as em
+import extractor as ex
+import sys
+
+
+def usage():
+    print("\nUsage options:\n\n",
+          "TO HIDE DATA IN WAV FILE:\n"
+          " -h <WavFile> <DataFile>\n\n",
+          "TO RECOVER HIDDEN DATA FROM WAV FILE IF PRESENT:\n",
+          " -r <WavFile>\n\n",
+          " --help  Display help\n")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) == 1 or len(sys.argv) > 4:
+        print("Invalid Number of Arguments!!")
+        usage()
+        sys.exit(1)
+    elif len(sys.argv) == 2:
+        if sys.argv[1] == '--help':
+            usage()
+    elif len(sys.argv) == 4:
+        if sys.argv[1] == '-h':
+            em.embed(sys.argv[2], sys.argv[3])
+        else:
+            print("Invalid Arguments!!")
+            usage()
+            sys.exit(1)
+    elif len(sys.argv) == 3:
+        if sys.argv[1] == '-r':
+            ex.extract(sys.argv[2])
+        else:
+            print("Invalid Arguments!!")
+            usage()
+            sys.exit(1)
