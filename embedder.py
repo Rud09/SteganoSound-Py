@@ -3,17 +3,17 @@ import bitarray as b
 import headerManager as hm
 import os
 import sys
+import securityManager as sm
 
 
-def embed(fpath, mpath):
+def embed(fpath, mpath, password_provided):
     song = w.open(fpath, mode='rb')
     songBytes = bytearray(list(song.readframes(song.getnframes())))
 
     msg = open(mpath, "rb")
-    msgBits = b.bitarray()
-    msgBits.fromfile(msg)
+    msgBits = b.bitarray(sm.encrypt(msg, password_provided))
 
-    hdr = hm.formHeader(mpath, os.path.getsize(mpath))
+    hdr = hm.formHeader(mpath, int(msgBits.length()/8))
     hdrBits = b.bitarray()
     hdrBits.fromstring(hdr)
 
@@ -29,7 +29,7 @@ def embed(fpath, mpath):
 
     songMod = bytes(songBytes)
 
-    with w.open("Mod"+os.path.basename(fpath), "wb") as fd:
+    with w.open(os.path.basename(fpath)+"_mod", "wb") as fd:
         fd.setparams(song.getparams())
         fd.writeframes(songMod)
 

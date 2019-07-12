@@ -1,9 +1,10 @@
 import wave as w
 import bitarray as b
 import headerManager
+import securityManager as sm
 
 
-def extract(fpath):
+def extract(fpath, password_provided):
 
     song = w.open(fpath, mode='rb')
     songBytes = bytearray(list(song.readframes(song.getnframes())))
@@ -29,7 +30,9 @@ def extract(fpath):
         i = i+1
 
     msg = b.bitarray(f)
+    decrypted = sm.decrypt(msg, password_provided)
     with open(fname, 'wb') as m:
-        msg.tofile(m)
+        m.write(decrypted)
+
     print("File Extracted Successfully!!")
     song.close()
