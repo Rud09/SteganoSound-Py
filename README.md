@@ -6,7 +6,7 @@ Audio Steganography is the art of covertly embedding secret messages into digita
 
 ### INSTALL REQUIRED PACKAGES (FOR FIRST TIME USE ONLY)
 ```
-$ pip3 install -r requeriments.txt
+$ pip3 install -r requirements.txt
 ```
 ### TO HIDE DATA IN WAV FILE:
 ```
