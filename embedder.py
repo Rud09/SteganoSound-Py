@@ -4,7 +4,7 @@ import headerManager as hm
 import os
 import sys
 import securityManager as sm
-
+# embedding should be with each pixel of image
 
 def embed(fpath, mpath, password_provided):
     song = w.open(fpath, mode='rb')
