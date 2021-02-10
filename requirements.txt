@@ -1,2 +1,2 @@
-cryptography==3.2
+cryptography==3.3.2
 bitarray==0.9.3
